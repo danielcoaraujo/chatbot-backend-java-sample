@@ -1,0 +1,22 @@
+
+configProperties:
+  username: "oi399003"
+  password: "naosei21"
+  proxy: "10.21.7.10"
+  port: "82"
+  workspaceId: "d131937e-51d8-4092-bcce-14687d71d819"
+  conversationUsername: "f3109d74-996e-472d-a011-91cb4e6a6178"
+  conversationPassword: "qPlxYTj3P3OW"
+  useProxy: true
+
+url:
+  consultarFatura: "http://10.58.198.109:8104"
+  consultarCliente: "http://10.58.198.109:8105"
+
+crm:
+  oi-tv: "SINN"
+
+key:
+  action: "action"
+  cpf: "cpf"
+  terminal: "terminal"

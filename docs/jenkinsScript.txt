@@ -1,0 +1,28 @@
+node('docker-ms'){
+    stage ('Checkout'){
+        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8e382c09-26f7-4095-b40e-0eb49bceeb11', url: 'git@dadhx01:arquitetura-digital/chatbot.git']]]
+    }
+    
+    stage ('MVN Install'){
+        withCredentials([usernamePassword(credentialsId: 'jksusr_docker_login', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
+            sh "sudo -E docker login -u ${USER} -p ${PASSWORD} dadhx05.interno:9090"
+            sh "sudo -E docker login -u ${USER} -p ${PASSWORD} dadhx05.interno:9091"
+        }
+        sh 'sudo -E mvn clean install'
+    }
+    
+    stage ('Build image'){
+        sh 'sudo -E mvn deploy'
+    }
+    
+    stage('Deploy'){
+        sh script: """
+            ssh -tT arqdigus@digdx01 bash -c "'
+            cd chatbot
+            sudo /usr/local/bin/docker-compose pull chatbot
+            sudo /usr/local/bin/docker-compose scale chatbot=0
+            sudo /usr/local/bin/docker-compose scale chatbot=1
+            '"
+        """, returnStdout: true
+    }
+}

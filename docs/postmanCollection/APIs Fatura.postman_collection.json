@@ -1,0 +1,62 @@
+{
+	"variables": [],
+	"info": {
+		"name": "APIs Fatura",
+		"_postman_id": "632c4c3f-fb7b-0ea6-d61e-c95e23f80fd2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[GET] - Cliente",
+			"request": {
+				"url": "http://10.58.198.109:8105/cliente/13368496735",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] - Fatura extra",
+			"request": {
+				"url": "http://10.58.198.109:8104/faturas/em-aberto/consultar",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cpfCliente\": \"85462284772\",\n\t\"numeroTerminal\": \"2137328590\",\n\t\"idContaFatura\": \"07224|2137328590|0|3\",\n\t\"crmOrigem\": \"STC\",\n\t\"numeroTerminalFaturaExtra\": \"2122223333\",\n\t\"idContaFaturaExtra\": \"05000|2122223333|0|2\",\n\t\"crmOrigemFaturaExtra\": \"STC\" \n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] - Fatura principal",
+			"request": {
+				"url": "http://10.58.198.109:8104/faturas/em-aberto/consultar",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cpfCliente\": \"13368496735\",\n\t\"numeroTerminal\": \"21986053399\",\n\t\"idContaFatura\": \"2067556978\",\n\t\"crmOrigem\": \"SBL63\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
