@@ -23,7 +23,12 @@ public class GetCustomerService {
 
     public Customer getCustomer(String cpf){
         try {
-            return getCustomerClient.getCustomer(cpf);
+            Customer customer = getCustomerClient.getCustomer(cpf);
+            if(customer == null){
+                throw new BotException("Desculpe, " +
+                        "não encontrei esse cpf em nosso sistema, poderia repetir?");
+            }
+            return customer;
 
         } catch (FeignException ex){
             throw new BotException("Desculpe, " +
